@@ -78,7 +78,7 @@ export abstract class LocalizeParser {
       this.defaultLang = this._cachedLang || browserLang || this.locales[0];
     }
     selectedLanguage = locationLang || this.defaultLang;
-    this.translate.setDefaultLang(this.defaultLang);
+    this.translate.setFallbackLang(this.defaultLang);
 
     let children: Routes = [];
     /** if set prefix is enforced */
@@ -404,7 +404,7 @@ export abstract class LocalizeParser {
         return key;
       }
       const fullKey = this.prefix + key;
-      const res = this.translate.getParsedResult(this._translationObject, fullKey);
+      const res = this.translate.instant(fullKey);
       return res !== fullKey ? res : key;
     }
   }
